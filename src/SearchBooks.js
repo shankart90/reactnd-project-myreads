@@ -1,37 +1,35 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
+import * as BooksAPI from './utils/BooksAPI'
 
 
 class SearchBooks extends Component {
-  static propTypes = {
-    books: PropTypes.array.isRequired,
-    onUpdateShelf: PropTypes.func.isRequired,
+  state = {
+    query: '',
+    showingBooks: []
   }
 
-  state = {
-    query: ''
+  static propTypes = {
+    onUpdateShelf: PropTypes.func.isRequired
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query })
-  }
-
-  clearQuery = () => {
-    this.setState({ query: '' })
+    if(query){
+      BooksAPI.search(query, 20).then((results) =>{
+          console.log(results.error)
+          if(results){
+            this.setState({ query })
+            console.log(results)
+            // this.setState({ showingBooks : results[1] })
+          }
+      })
+    }
   }
 
   render(){
-    const { books, onUpdateShelf } = this.props
-    const { query } = this.state
-    let showingBooks = []
-
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), 'i')
-      showingBooks = books.filter((book) => match.test(book.title) ||
-                                            match.test(book.authors))
-    }
+    const { onUpdateShelf } = this.props
+    const { query, showingBooks } = this.state
 
     return(
       <div className="app">
@@ -49,26 +47,7 @@ class SearchBooks extends Component {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-                {showingBooks.map((book) => (
-                  <li key={book.id}>
-                    <div className="book">
-                      <div className="book-top">
-                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}/>
-                          <div className="book-shelf-changer">
-                            <select defaultValue={book.shelf} onChange={(e) => onUpdateShelf(book, e)}>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.authors}</div>
-                      </div>
-                  </li>
-                ))}
+
             </ol>
           </div>
         </div>
