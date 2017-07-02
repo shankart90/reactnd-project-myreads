@@ -51,7 +51,8 @@ class SearchBooks extends Component {
           <div className="search-books-results">
             <ol className="books-grid">
                 {showingBooks.filter(function(books) {
-                      if(books.hasOwnProperty("imageLinks")){
+                      if(books.imageLinks.hasOwnProperty("smallThumbnail") ||
+                         books.imageLinks.hasOwnProperty("Thumbnail")){
                          return books
                       }else{
                         console.log(books);
