@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import BooksGrid from './BooksGrid'
+import Books from './Books'
 
 class SearchBooks extends Component {
   state = {
@@ -45,10 +45,12 @@ class SearchBooks extends Component {
               />
             </div>
           </div>
-          <BooksGrid
-              showingBooks={showingBooks}
-              onUpdateShelf={onUpdateShelf}
-          />
+          <div className="search-books-results">
+            <Books
+                books={showingBooks}
+                onUpdateShelf={onUpdateShelf}
+            />
+          </div>
         </div>
       </div>
     )

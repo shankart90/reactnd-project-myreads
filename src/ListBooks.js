@@ -23,33 +23,33 @@ class ListBooks extends Component {
            </div>
            <div className="list-books-content">
              <div>
-               <div className="bookshelf">
-                 <h2 className="bookshelf-title">Currently Reading</h2>
-                 {currentlyReading.length &&
-                     <Books
-                           books={currentlyReading}
-                           onUpdateShelf={onUpdateShelf}
-                      />
-                  }
-               </div>
-               <div className="bookshelf">
-                 <h2 className="bookshelf-title">Want to Read</h2>
-                 {wantToRead.length &&
-                     <Books
-                           books={wantToRead}
-                           onUpdateShelf={onUpdateShelf}
-                      />
-                  }
-               </div>
-               <div className="bookshelf">
-                 <h2 className="bookshelf-title">Read</h2>
-                 {read.length &&
-                     <Books
-                           books={read}
-                           onUpdateShelf={onUpdateShelf}
-                      />
-                  }
-               </div>
+                <div className="bookshelf-books">
+                   <h2 className="bookshelf-title">Currently Reading</h2>
+                   {currentlyReading.length &&
+                       <Books
+                             books={currentlyReading}
+                             onUpdateShelf={onUpdateShelf}
+                        />
+                    }
+                </div>
+                <div className="bookshelf-books">
+                   <h2 className="bookshelf-title">Want to Read</h2>
+                   {wantToRead.length &&
+                       <Books
+                             books={wantToRead}
+                             onUpdateShelf={onUpdateShelf}
+                        />
+                    }
+                </div>
+                <div className="bookshelf-books">
+                   <h2 className="bookshelf-title">Read</h2>
+                   {read.length &&
+                       <Books
+                             books={read}
+                             onUpdateShelf={onUpdateShelf}
+                        />
+                    }
+                </div>
              </div>
            </div>
             <div className="open-search">

@@ -11,7 +11,6 @@ class Books extends Component {
     const {books, onUpdateShelf} = this.props
 
     return(
-      <div className="bookshelf-books">
         <ol className="books-grid">
           {books.map((book) => (
             <li key={book.id}>
@@ -34,7 +33,6 @@ class Books extends Component {
             </li>
           ))}
         </ol>
-      </div>
     );
   }
 }
