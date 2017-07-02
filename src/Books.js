@@ -1,16 +1,6 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 
-class Books extends Component {
-  static propTypes = {
-    books: PropTypes.array.isRequired,
-    onUpdateShelf: PropTypes.func.isRequired
-  }
-
-  render(){
-    const {books, onUpdateShelf} = this.props
-
-    return(
+const Books = ({ books, onUpdateShelf }) =>
         <ol className="books-grid">
           {books.map((book) => (
             <li key={book.id}>
@@ -33,8 +23,5 @@ class Books extends Component {
             </li>
           ))}
         </ol>
-    );
-  }
-}
 
 export default Books;
