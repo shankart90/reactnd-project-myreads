@@ -9,7 +9,8 @@ class BooksApp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      books: []
+      books: [],
+      searchResults: []
     }
     this.updateBookShelf = this.updateBookShelf.bind(this);
     this.SearchBooks = this.SearchBooks.bind(this);
@@ -27,7 +28,7 @@ class BooksApp extends React.Component {
       BooksAPI.update(book, shelf).then(() => {
         book.shelf = shelf;
         this.setState(state => ({
-          books: state.books.filter(b => b.id !== book.id).concat([book])
+          searchResults: state.books.filter(b => b.id !== book.id).concat([book])
         }))
       })
     }
@@ -37,7 +38,7 @@ class BooksApp extends React.Component {
     BooksAPI.search(query, 20).then((showingBooks) =>{
         if(showingBooks.error === undefined){
           this.setState(state => ({
-             books: state.books.concat(showingBooks)
+             searchResults: state.books.concat(showingBooks)
           }))
         }
     })
@@ -54,7 +55,7 @@ class BooksApp extends React.Component {
         )}/>
         <Route path="/search" render={() => (
           <SearchBooks
-            books={this.state.books}
+            books={this.state.searchResults}
             onUpdateShelf={this.updateBookShelf}
             onSearchBooks={this.SearchBooks}
           />
