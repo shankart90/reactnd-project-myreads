@@ -9,8 +9,7 @@ class BooksGrid extends Component{
 
   render(){
     const {showingBooks, onUpdateShelf} = this.props
-    console.log(showingBooks, onUpdateShelf)
-
+    
     return(
       <div className="search-books-results">
         <ol className="books-grid">
