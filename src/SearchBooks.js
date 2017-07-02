@@ -50,19 +50,11 @@ class SearchBooks extends Component {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-                {showingBooks.filter(function(books) {
-                      if(books.imageLinks.hasOwnProperty("smallThumbnail") ||
-                         books.imageLinks.hasOwnProperty("Thumbnail")){
-                         return books
-                      }else{
-                        console.log(books);
-                        return []
-                      }
-                  }).map((book) => (
+                {showingBooks.map((book) => (
                   <li key={book.id}>
                     <div className="book">
                       <div className="book-top">
-                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}/>
+                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks !== undefined? book.imageLinks.smallThumbnail:''})`}}/>
                           <div className="book-shelf-changer">
                             <select defaultValue={book.shelf} onChange={(event) => onUpdateShelf(book, event)}>
                               <option value="none" disabled>Move to...</option>
