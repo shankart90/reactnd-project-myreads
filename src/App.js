@@ -37,7 +37,7 @@ class BooksApp extends React.Component {
     BooksAPI.search(query, 20).then((showingBooks) =>{
         if(showingBooks.error === undefined){
           this.setState(state => ({
-             books: this.state.books.concat([showingBooks])
+             books: state.books.concat(showingBooks)
           }))
         }
     })

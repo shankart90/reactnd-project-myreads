@@ -29,7 +29,7 @@ class ListBooks extends Component {
                        <li key={book.id}>
                          <div className="book">
                            <div className="book-top">
-                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}/>
+                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks !== undefined? book.imageLinks.thumbnail:''})`}}/>
                                <div className="book-shelf-changer">
                                <select value={book.shelf} onChange={(e) => onUpdateShelf(book, e)}>
                                  <option value="none" disabled>Move to...</option>
@@ -58,7 +58,7 @@ class ListBooks extends Component {
                            <li key={book.id}>
                              <div className="book">
                                <div className="book-top">
-                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}/>
+                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks !== undefined? book.imageLinks.thumbnail:''})`}}/>
                                    <div className="book-shelf-changer">
                                    <select value={book.shelf} onChange={(e) => onUpdateShelf(book, e)}>
                                      <option value="none" disabled>Move to...</option>
@@ -87,7 +87,7 @@ class ListBooks extends Component {
                        <li key={book.id}>
                          <div className="book">
                            <div className="book-top">
-                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}/>
+                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks !== undefined? book.imageLinks.thumbnail:''})`}}/>
                                <div className="book-shelf-changer">
                                <select value={book.shelf} onChange={(e) => onUpdateShelf(book, e)}>
                                  <option value="none" disabled>Move to...</option>

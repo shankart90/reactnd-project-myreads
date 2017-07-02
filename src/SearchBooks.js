@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import * as BooksAPI from './utils/BooksAPI'
-
 
 class SearchBooks extends Component {
   state = {
@@ -17,19 +15,18 @@ class SearchBooks extends Component {
   updateQuery = (query) => {
     if(query){
       this.setState({query})
+      this.props.onSearchBooks(query)
     }else{
       this.setState({query:''})
     }
   }
 
   render(){
-    const {onUpdateShelf, books, onSearchBooks} = this.props
+    const {onUpdateShelf, books} = this.props
     const {query} = this.state
     let showingBooks = books
 
-    if(query){
-      onSearchBooks(query)
-    }else{
+    if(!query){
       showingBooks = []
     }
 
