@@ -17,22 +17,22 @@ class SearchBooks extends Component {
   updateQuery = (query) => {
     if(query){
       BooksAPI.search(query, 20).then((results) =>{
-            console.log("results.error " + results.error)
+            this.setState({query})
             if(results.error === undefined){
-              this.setState({ query })
-              console.log('present')
-              this.setState({ showingBooks : results })
+              this.setState({showingBooks :results})
             }else{
-              this.setState({ showingBooks : [] })
-              console.log('empty books')
+              this.setState({showingBooks:[]})
             }
       })
+    }else{
+      this.setState({query:''})
+      this.setState({showingBooks:[]})
     }
   }
 
   render(){
-    const { onUpdateShelf } = this.props
-    const { query, showingBooks } = this.state
+    const {onUpdateShelf} = this.props
+    const {query, showingBooks} = this.state
 
     return(
       <div className="app">
@@ -54,7 +54,7 @@ class SearchBooks extends Component {
                   <li key={book.id}>
                     <div className="book">
                       <div className="book-top">
-                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks !== undefined? book.imageLinks.smallThumbnail:''})`}}/>
+                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks !== undefined? book.imageLinks.thumbnail:''})`}}/>
                           <div className="book-shelf-changer">
                             <select defaultValue={book.shelf} onChange={(event) => onUpdateShelf(book, event)}>
                               <option value="none" disabled>Move to...</option>
