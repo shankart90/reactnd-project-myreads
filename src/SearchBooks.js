@@ -6,33 +6,32 @@ import * as BooksAPI from './utils/BooksAPI'
 
 class SearchBooks extends Component {
   state = {
-    query: '',
-    showingBooks: []
+    query: ''
   }
 
   static propTypes = {
-    onUpdateShelf: PropTypes.func.isRequired
+    onUpdateShelf: PropTypes.func.isRequired,
+    onSearchBooks: PropTypes.func.isRequired
   }
 
   updateQuery = (query) => {
     if(query){
-      BooksAPI.search(query, 20).then((results) =>{
-            this.setState({query})
-            if(results.error === undefined){
-              this.setState({showingBooks :results})
-            }else{
-              this.setState({showingBooks:[]})
-            }
-      })
+      this.setState({query})
     }else{
       this.setState({query:''})
-      this.setState({showingBooks:[]})
     }
   }
 
   render(){
-    const {onUpdateShelf} = this.props
-    const {query, showingBooks} = this.state
+    const {onUpdateShelf, books, onSearchBooks} = this.props
+    const {query} = this.state
+    let showingBooks = books
+
+    if(query){
+      onSearchBooks(query)
+    }else{
+      showingBooks = []
+    }
 
     return(
       <div className="app">
