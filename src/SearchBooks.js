@@ -17,12 +17,15 @@ class SearchBooks extends Component {
   updateQuery = (query) => {
     if(query){
       BooksAPI.search(query, 20).then((results) =>{
-          //console.log(results.error)
-          if(results){
-            this.setState({ query })
-             //console.log(results)
-            this.setState({ showingBooks : results[1] })
-          }
+            console.log("results.error " + results.error)
+            if(results.error === undefined){
+              this.setState({ query })
+              console.log('present')
+              this.setState({ showingBooks : results })
+            }else{
+              this.setState({ showingBooks : [] })
+              console.log('empty books')
+            }
       })
     }
   }
@@ -39,7 +42,7 @@ class SearchBooks extends Component {
             <div className="search-books-input-wrapper">
               <input
                     type="text"
-                    placeholder="Search by title or author"
+                    placeholder="Search books"
                     value={query}
                     onChange={(event) => this.updateQuery(event.target.value)}
               />
@@ -47,7 +50,14 @@ class SearchBooks extends Component {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-                {showingBooks.map((book) => (
+                {showingBooks.filter(function(books) {
+                      if(books.hasOwnProperty("imageLinks")){
+                         return books
+                      }else{
+                        console.log(books);
+                        return []
+                      }
+                  }).map((book) => (
                   <li key={book.id}>
                     <div className="book">
                       <div className="book-top">
