@@ -9,7 +9,7 @@ class ListBooks extends Component {
   }
 
   render(){
-     const { books, onUpdateShelf } = this.props
+     const {books, onUpdateShelf} = this.props
      let showingBooks = books
 
      return(
